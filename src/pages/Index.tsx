@@ -1,12 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { LeftSidebar } from "@/components/forum/LeftSidebar";
+import { RightSidebar } from "@/components/forum/RightSidebar";
+import { Feed } from "@/components/forum/Feed";
+import { MobileNav } from "@/components/forum/MobileNav";
+import { ThemeToggle } from "@/components/forum/ThemeToggle";
+import { useEffect } from "react";
 
 const Index = () => {
+  useEffect(() => {
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background">
+      <ThemeToggle />
+      
+      <div className="flex w-full max-w-7xl mx-auto">
+        <LeftSidebar />
+        <Feed />
+        <RightSidebar />
       </div>
+
+      <MobileNav />
+      
+      {/* Bottom padding for mobile nav */}
+      <div className="h-20 lg:hidden" />
     </div>
   );
 };
