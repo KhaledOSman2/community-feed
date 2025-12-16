@@ -91,7 +91,7 @@ export function Feed() {
       {/* Posts */}
       <div className="space-y-4">
         {mockPosts.map((post) => (
-          <PostCard key={post.id} {...post} />
+          <PostCard key={post.id} id={post.id} {...post} />
         ))}
       </div>
     </div>
