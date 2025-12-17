@@ -9,62 +9,74 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const userProfile = {
-  name: "John Doe",
-  handle: "@johndoe",
-  avatar: "JD",
-  coverImage: "",
-  bio: "Full-stack developer passionate about building amazing web experiences. React enthusiast. Open source contributor. Coffee lover ☕",
-  location: "San Francisco, CA",
-  website: "johndoe.dev",
-  joinDate: "March 2023",
+  name: "أحمد محمد",
+  username: "ahmed_dev",
+  handle: "@ahmed_dev",
+  avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+  coverImage: "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=1200&h=400&fit=crop",
+  bio: "مطور ويب متكامل | شغوف ببناء تجارب رقمية مذهلة | مساهم في المصادر المفتوحة ☕",
+  location: "الرياض، السعودية",
+  website: "ahmeddev.com",
+  joinDate: "مارس 2023",
   verified: true,
-  stats: {
-    posts: 248,
-    followers: "12.5K",
-    following: 892,
-    likes: "4.2K",
-  },
 };
 
 const userPosts = [
   {
     id: 1,
     author: {
-      name: "John Doe",
-      handle: "@johndoe",
-      avatar: "JD",
+      name: "أحمد محمد",
+      handle: "@ahmed_dev",
+      avatar: "أم",
+      avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       verified: true,
     },
-    content: "Just shipped a new feature that I've been working on for weeks! The satisfaction of seeing your code come to life never gets old. 🚀\n\nWhat's everyone else working on today?",
+    content: "أطلقت للتو ميزة جديدة كنت أعمل عليها لأسابيع! شعور رائع أن ترى كودك يعمل بشكل مثالي 🚀\n\nما الذي تعملون عليه اليوم؟",
     stats: { likes: 234, comments: 45, reposts: 12 },
-    timestamp: "2h ago",
-    tags: ["coding", "webdev"],
+    timestamp: "منذ ساعتين",
+    tags: ["برمجة", "تطوير_ويب"],
   },
   {
     id: 2,
     author: {
-      name: "John Doe",
-      handle: "@johndoe",
-      avatar: "JD",
+      name: "أحمد محمد",
+      handle: "@ahmed_dev",
+      avatar: "أم",
+      avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       verified: true,
     },
-    content: "Hot take: TypeScript has made me a better JavaScript developer. The type safety isn't just about catching bugs - it's about thinking more clearly about your data structures.",
+    content: "TypeScript جعلني مطور JavaScript أفضل. الأمان في الأنواع ليس فقط لاكتشاف الأخطاء - إنه يساعدك على التفكير بوضوح في هياكل البيانات.",
     stats: { likes: 567, comments: 89, reposts: 45 },
-    timestamp: "1d ago",
+    timestamp: "منذ يوم",
     tags: ["typescript", "javascript"],
   },
   {
     id: 3,
     author: {
-      name: "John Doe",
-      handle: "@johndoe",
-      avatar: "JD",
+      name: "أحمد محمد",
+      handle: "@ahmed_dev",
+      avatar: "أم",
+      avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       verified: true,
     },
-    content: "Learning in public has been one of the best decisions I've made for my career. Don't be afraid to share your journey - even the mistakes!",
+    content: "التعلم بشكل علني كان من أفضل القرارات التي اتخذتها لمسيرتي المهنية. لا تخف من مشاركة رحلتك - حتى الأخطاء!",
     stats: { likes: 892, comments: 124, reposts: 78 },
-    timestamp: "3d ago",
-    tags: ["career", "learning"],
+    timestamp: "منذ 3 أيام",
+    tags: ["مسيرة_مهنية", "تعلم"],
+  },
+  {
+    id: 4,
+    author: {
+      name: "أحمد محمد",
+      handle: "@ahmed_dev",
+      avatar: "أم",
+      avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      verified: true,
+    },
+    content: "نصيحة للمطورين الجدد: ابدأ بمشاريع صغيرة وقم ببنائها بالكامل. التعلم من خلال البناء أفضل من مشاهدة الدروس فقط! 💪",
+    stats: { likes: 1234, comments: 156, reposts: 89 },
+    timestamp: "منذ أسبوع",
+    tags: ["نصائح", "برمجة"],
   },
 ];
 
@@ -94,20 +106,27 @@ const Profile = () => {
             </Link>
             <div>
               <h1 className="text-xl font-bold text-foreground">{userProfile.name}</h1>
-              <p className="text-sm text-muted-foreground">{userProfile.stats.posts} posts</p>
+              <p className="text-sm text-muted-foreground">{userPosts.length} منشور</p>
             </div>
           </div>
 
           {/* Cover Image */}
-          <div className="h-48 bg-gradient-to-r from-primary/30 to-primary/10" />
+          <div className="h-48 relative overflow-hidden">
+            <img 
+              src={userProfile.coverImage} 
+              alt="Cover" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
+          </div>
 
           {/* Profile Info */}
           <div className="px-4 pb-4">
             <div className="flex justify-between items-start -mt-16 mb-4">
-              <Avatar className="w-32 h-32 border-4 border-background">
-                <AvatarImage src="" />
+              <Avatar className="w-32 h-32 border-4 border-background shadow-lg">
+                <AvatarImage src={userProfile.avatarUrl} alt={userProfile.name} />
                 <AvatarFallback className="bg-primary text-primary-foreground text-4xl font-bold">
-                  {userProfile.avatar}
+                  {userProfile.name.charAt(0)}
                 </AvatarFallback>
               </Avatar>
               <div className="flex gap-2 mt-20">
@@ -120,11 +139,11 @@ const Profile = () => {
                   onClick={() => setIsFollowing(!isFollowing)}
                   className={`px-5 py-2 rounded-full font-semibold transition-colors ${
                     isFollowing
-                      ? "border border-border text-foreground hover:border-red-500 hover:text-red-500"
+                      ? "border border-border text-foreground hover:border-destructive hover:text-destructive"
                       : "bg-primary text-primary-foreground hover:opacity-90"
                   }`}
                 >
-                  {isFollowing ? "Following" : "Follow"}
+                  {isFollowing ? "متابَع" : "متابعة"}
                 </button>
               </div>
             </div>
@@ -152,19 +171,24 @@ const Profile = () => {
                 </a>
                 <span className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  Joined {userProfile.joinDate}
+                  انضم في {userProfile.joinDate}
                 </span>
               </div>
 
-              <div className="flex gap-5 text-sm">
-                <span>
-                  <strong className="text-foreground">{userProfile.stats.following}</strong>{" "}
-                  <span className="text-muted-foreground">Following</span>
-                </span>
-                <span>
-                  <strong className="text-foreground">{userProfile.stats.followers}</strong>{" "}
-                  <span className="text-muted-foreground">Followers</span>
-                </span>
+              {/* Stats Section */}
+              <div className="flex gap-6 py-3 border-y border-border">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-foreground">{userPosts.length}</div>
+                  <div className="text-sm text-muted-foreground">منشور</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-foreground">12.5K</div>
+                  <div className="text-sm text-muted-foreground">متابِع</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-foreground">892</div>
+                  <div className="text-sm text-muted-foreground">متابَع</div>
+                </div>
               </div>
             </div>
           </div>
@@ -172,9 +196,9 @@ const Profile = () => {
           {/* Tabs */}
           <div className="flex border-b border-border">
             {[
-              { id: "posts", label: "Posts" },
-              { id: "replies", label: "Replies" },
-              { id: "likes", label: "Likes" },
+              { id: "posts", label: "المنشورات" },
+              { id: "replies", label: "الردود" },
+              { id: "likes", label: "الإعجابات" },
             ].map((tab) => (
               <button
                 key={tab.id}
